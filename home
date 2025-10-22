@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zon Publishing Services - See Inside the Machine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== CSS VARIABLES ===== */
+        :root {
+            --color-primary: #007F5F;
+            --color-bg: #1A1A1A;
+            --color-text: #BFC3C9;
+            --color-accent: #39FF14;
+            --color-dark: #0a0a0a;
+            --color-card: #222222;
+            --color-border: #333333;
+            --font-heading: 'Orbitron', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 2rem;
+            --space-lg: 3rem;
+            --space-xl: 4rem;
+            --glow-primary: 0 0 20px rgba(0, 127, 95, 0.3);
+            --glow-accent: 0 0 20px rgba(57, 255, 20, 0.3);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            color: #fff;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            font-weight: 900;
+        }
+
+        h2 {
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+        }
+
+        h3 {
+            font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+        }
+
+        p {
+            margin-bottom: var(--space-sm);
+        }
+
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--color-accent);
+        }
+
+        /* ===== HEADER ===== */
+        .site-header {
+            background: linear-gradient(135deg, #006B54 0%, #007F5F 50%, #00a876 100%);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--color-accent);
+            box-shadow: 0 4px 20px rgba(0, 127, 95, 0.3);
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-md) 0;
+            gap: var(--space-sm);
+        }
+
+        .logo a {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--color-accent);
+            text-shadow: 0 0 30px rgba(57, 255, 20, 0.8), 0 0 60px rgba(57, 255, 20, 0.4);
+            letter-spacing: 3px;
+        }
+
+        .logo a:hover {
+            color: #fff;
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.8), 0 0 80px rgba(57, 255, 20, 0.6);
+        }
+
+        .main-nav {
+            display: flex;
+            gap: var(--space-lg);
+        }
+
+        .main-nav a {
+            color: var(--color-accent);
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: 4px;
+            transition: var(--transition);
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+        }
+
+        .main-nav a:hover {
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.2);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+        }
+
+        /* ===== BUTTONS ===== */
+        .cta-button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            font-family: var(--font-body);
+            font-weight: 600;
+            border-radius: 4px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .cta-button.primary {
+            background: linear-gradient(135deg, var(--color-primary), #00a876);
+            color: #fff;
+            box-shadow: var(--glow-primary);
+        }
+
+        .cta-button.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 127, 95, 0.5);
+        }
+
+        .cta-button.secondary {
+            background-color: transparent;
+            border: 2px solid var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .cta-button.secondary:hover {
+            background-color: var(--color-primary);
+            color: #fff;
+            box-shadow: var(--glow-primary);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 3rem 0;
+            }
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0, 127, 95, 0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero-title {
+            margin-bottom: var(--space-md);
+            color: var(--color-text);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            margin-bottom: var(--space-lg);
+            color: var(--color-text);
+            line-height: 1.7;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+        }
+
+        /* ===== RESULTS SECTION ===== */
+        .results {
+            padding: 4rem 0;
+            background-color: var(--color-dark);
+            background-image: 
+                linear-gradient(rgba(0, 127, 95, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 127, 95, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        @media (max-width: 768px) {
+            .results {
+                padding: 2.5rem 0;
+            }
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .result-card {
+            background: #2a2a2a;
+            padding: var(--space-lg);
+            border-radius: 12px;
+            text-align: center;
+            border: none;
+            border-top: 3px solid var(--color-accent);
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .result-card:hover {
+            transform: translateY(-5px);
+            border-top-color: #00FF7F;
+            box-shadow: 0 8px 25px rgba(57, 255, 20, 0.2);
+        }
+
+        .result-number {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 5vw, 3rem);
+            font-weight: 900;
+            color: #00FF7F;
+            text-shadow: 0 0 20px rgba(0, 255, 127, 0.6);
+            margin-bottom: var(--space-sm);
+        }
+
+        .result-label {
+            font-size: 1.1rem;
+            color: var(--color-text);
+        }
+
+        .results-description {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* ===== SERVICES OVERVIEW ===== */
+        .services-overview {
+            padding: 4.5rem 0 4rem 0;
+            background-color: var(--color-bg);
+        }
+        
+        @media (max-width: 768px) {
+            .services-overview {
+                padding: 3rem 0 2.5rem 0;
+            }
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .service-card {
+            background: #2a2a2a;
+            padding: var(--space-lg);
+            border-radius: 12px;
+            border: none;
+            border-top: 3px solid var(--color-accent);
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .service-card:hover {
+            border-top-color: #00FF7F;
+            box-shadow: 0 8px 25px rgba(57, 255, 20, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            color: #00FF7F;
+            margin-bottom: var(--space-sm);
+            text-shadow: 0 0 10px rgba(0, 255, 127, 0.3);
+        }
+
+        .service-card p {
+            margin-bottom: var(--space-md);
+            line-height: 1.7;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: var(--space-md);
+        }
+
+        .service-features li {
+            padding: var(--space-xs) 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .service-features li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-weight: bold;
+        }
+
+        .service-link {
+            display: inline-block;
+            color: var(--color-primary);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .service-link:hover {
+            color: #00FF7F;
+            text-shadow: 0 0 10px rgba(0, 255, 127, 0.4);
+            transform: translateX(5px);
+        }
+
+        /* ===== TRUST SECTION ===== */
+        .trust {
+            padding: 4rem 0 3rem 0;
+            background-color: var(--color-dark);
+            background-image: 
+                linear-gradient(rgba(0, 127, 95, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 127, 95, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        @media (max-width: 768px) {
+            .trust {
+                padding: 3rem 0 2rem 0;
+            }
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .trust-stat {
+            text-align: center;
+            padding: var(--space-md);
+        }
+
+        .trust-number {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #00FF7F;
+            text-shadow: 0 0 20px rgba(0, 255, 127, 0.6);
+            margin-bottom: var(--space-xs);
+        }
+
+        .trust-label {
+            color: var(--color-text);
+            font-size: 1rem;
+        }
+
+        .testimonials {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, var(--color-card) 0%, #2a2a2a 100%);
+            padding: var(--space-lg);
+            border-radius: 8px;
+            border-left: 4px solid var(--color-primary);
+            margin-bottom: var(--space-md);
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: var(--space-sm);
+            line-height: 1.7;
+        }
+
+        .testimonial-author {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        /* ===== FINAL CTA ===== */
+        .final-cta {
+            padding: 3rem 0;
+            background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-bg) 100%);
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .final-cta {
+                padding: 2rem 0;
+            }
+        }
+
+        .cta-content h2 {
+            margin-bottom: var(--space-md);
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: var(--space-lg);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== FOOTER ===== */
+        .site-footer {
+            background-color: var(--color-dark);
+            padding: var(--space-lg) 0 var(--space-md);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer-section h3, .footer-section h4 {
+            color: var(--color-primary);
+            margin-bottom: var(--space-sm);
+            font-size: 1.2rem;
+        }
+
+        .footer-section p {
+            margin-bottom: var(--space-xs);
+        }
+
+        .footer-nav {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .footer-nav a {
+            color: var(--color-text);
+            transition: var(--transition);
+        }
+
+        .footer-nav a:hover {
+            color: var(--color-accent);
+            padding-left: var(--space-xs);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--color-border);
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            /* Header adjustments */
+            .logo a {
+                font-size: 2.5rem;
+            }
+            
+            .main-nav {
+                gap: var(--space-md);
+            }
+            
+            .main-nav a {
+                font-size: 1rem;
+            }
+            
+            /* CTA button adjustments */
+            .hero-cta {
+                flex-direction: column;
+            }
+            
+            .cta-button {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">Zon Publishing</a>
+                </div>
+                <nav class="main-nav">
+                    <a href="about.html">About</a>
+                    <a href="services.html">Services</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">See inside the machine.</h1>
+                    <p class="hero-subtitle">Amazon is the hardest bookstore in the world to sell through. Most publishers get lost in the system. We help you see how it really works and turn that knowledge into profit.</p>
+                    <div class="hero-cta">
+                        <a href="contact.html" class="cta-button primary">Book A Meeting</a>
+                        <a href="contact.html" class="cta-button secondary">Request Proposal</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results">
+            <div class="container">
+                <h2 class="section-title">Proven Results</h2>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="result-number">25%+</div>
+                        <div class="result-label">Average Growth in 3 Months</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-number">A10</div>
+                        <div class="result-label">Algorithm Expertise</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-number">100%</div>
+                        <div class="result-label">Publishing Focus</div>
+                    </div>
+                </div>
+                <p class="results-description">Most consultants either don't get books or don't get Amazon. We get both. That's why publishers we work with see double-digit growth in months, not years.</p>
+            </div>
+        </section>
+
+        <!-- Services Overview -->
+        <section class="services-overview">
+            <div class="container">
+                <h2 class="section-title">How We Help Publishers Win</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>Amazon Consultancy</h3>
+                        <p>Deep-dive audits and strategic implementation. From A10 algorithm optimization to advertising strategy, we help you unlock Amazon's full potential.</p>
+                        <ul class="service-features">
+                            <li>One-off intensive projects</li>
+                            <li>Multi-session engagements</li>
+                            <li>3-month retainer programs</li>
+                        </ul>
+                        <a href="services.html" class="service-link">Learn More →</a>
+                    </div>
+                    <div class="service-card">
+                        <h3>Team Training</h3>
+                        <p>Upskill your team with the latest Amazon strategies. Hands-on workshops covering everything from listing optimization to external traffic generation.</p>
+                        <ul class="service-features">
+                            <li>Custom workshop content</li>
+                            <li>Practical implementation</li>
+                            <li>Ongoing support materials</li>
+                        </ul>
+                        <a href="services.html#training" class="service-link">Learn More →</a>
+                    </div>
+                    <div class="service-card">
+                        <h3>Managed Service</h3>
+                        <p>Let me run your Amazon operations. Full-service account management for publishers who want results without the complexity.</p>
+                        <ul class="service-features">
+                            <li>Complete account management</li>
+                            <li>Continuous optimization</li>
+                            <li>Performance reporting</li>
+                        </ul>
+                        <a href="services.html#managed" class="service-link">Learn More →</a>
+                    </div>
+                    <div class="service-card">
+                        <h3>AEO/GEO Strategy</h3>
+                        <p>Stay ahead with Answer Engine Optimization and Generative Engine Optimization. Prepare for the future of search beyond Amazon.</p>
+                        <ul class="service-features">
+                            <li>ChatGPT/Perplexity optimization</li>
+                            <li>Voice search strategy</li>
+                            <li>Future-proof positioning</li>
+                        </ul>
+                        <a href="services.html#aeo" class="service-link">Learn More →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Section -->
+        <section class="trust">
+            <div class="container">
+                <h2 class="section-title">Trusted by Publishers</h2>
+                <div class="trust-grid">
+                    <div class="trust-stat">
+                        <div class="trust-number">40+</div>
+                        <div class="trust-label">Publishers Served</div>
+                    </div>
+                    <div class="trust-stat">
+                        <div class="trust-number">£50m+</div>
+                        <div class="trust-label">Revenue Managed</div>
+                    </div>
+                    <div class="trust-stat">
+                        <div class="trust-number">15+</div>
+                        <div class="trust-label">Years Experience</div>
+                    </div>
+                    <div class="trust-stat">
+                        <div class="trust-number">90%</div>
+                        <div class="trust-label">Hit Growth Targets</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="final-cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to grow your Amazon sales?</h2>
+                    <p>Let's discuss how we can help your publishing business thrive on Amazon.</p>
+                    <a href="contact.html" class="cta-button primary">Book A Meeting</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Zon Publishing Services</h3>
+                    <p>Amazon consultancy for book publishers</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <nav class="footer-nav">
+                        <a href="about.html">About</a>
+                        <a href="services.html">Services</a>
+                        <a href="contact.html">Contact</a>
+                    </nav>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: <a href="mailto:cam@zonpublishing.co.uk">cam@zonpublishing.co.uk</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Zon Publishing Services. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
